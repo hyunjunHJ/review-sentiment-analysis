@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from schemas import ChatbotResponse
 
 app = FastAPI()
 
@@ -13,8 +14,10 @@ app = FastAPI()
 #     allow_headers=["*"],
 # )
 
+
 #endpoint
-@app.post('/sentiment')
+
+@app.post('/sentiment', response_model=ChatbotResponse)
 async def translate_sentiment(prompt:str):
     return {"prompt":prompt}
 

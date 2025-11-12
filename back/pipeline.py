@@ -25,9 +25,8 @@ print(translated, translated[0]['translation_text'])
 
 sentimental = pipeline('sentiment-analysis',
                        model= "nlptown/bert-base-multilingual-uncased-sentiment")
-
+# 0번째 배열의 translation_text
 # [{'translation_text': "Pedro Pascalqa qatiqnintam reto-fuerzaman pusan, huk rikchaq rikch'ayniyoq rikch'ayniyoq rikch'ayniyoqman."}] 
 
 # [{'label': '1 star', 'score': 0.5432569980621338}]
 
-translated= 
