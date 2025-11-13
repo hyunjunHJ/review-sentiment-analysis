@@ -1,4 +1,13 @@
 from transformers import pipeline
+# from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
+# from langchain_core.prompts.chat import (
+#     SystemMessagePromptTemplate,
+#     HumanMessagePromptTemplate,
+# )
+# from langchain_community.llms import Ollama
+# from langchain_google_genai import ChatGoogleGenerativeAI
+# import os
+# from dotenv import load_dotenv
 # import onnxruntime # 그냥 torch깔았음..
 
 # examples
@@ -20,17 +29,18 @@ def trans_senti(prompt:str):         #prompt:str):
     prompt=prompt
 
     translator = pipeline("translation", 
-                        model="Helsinki-NLP/opus-mt-tc-bible-big-mul-mul")
+                        model="facebook/m2m100_418M")
 
-    translated = translator(">>kr<< "+ prompt)
+    translated = translator(prompt, src_lang="en", tgt_lang="ko")
     #text
     print(translated, translated[0]['translation_text'])
 
     #변수가 많아지면 for문 사용여부
     src=""
 
-    sentimental = pipeline('sentiment-analysis',
-                        model= "nlptown/bert-base-multilingual-uncased-sentiment")
+    sentimental = pipeline(task="sentiment-analysis",
+              model='Copycats/koelectra-base-v3-generalized-sentiment-analysis',
+              framework='pt')
     # 0번째 배열의 translation_text
     # [{'translation_text': "Pedro Pascalqa qatiqnintam reto-fuerzaman pusan, huk rikchaq rikch'ayniyoq rikch'ayniyoq rikch'ayniyoqman."}] 
     # [{'label': '1 star', 'score': 0.5432569980621338}]
