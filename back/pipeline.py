@@ -1,13 +1,6 @@
 from transformers import pipeline
 import onnxruntime
 
-translator = pipeline("translation", 
-                      model="Helsinki-NLP/opus-mt-tc-bible-big-mul-mul")
-
-translated = translator(">>kr<< You'd better not speak to Tom about that.")
-#text
-print(translated, translated[0]['translation_text'])
-
 # examples
 # src = [
 #     "Pedro Pascal leads the team back to the retro-future in colorful new version.",
@@ -22,11 +15,24 @@ print(translated, translated[0]['translation_text'])
 #     "The absolute authority and force of Daniel Day-Lewis carries this movie in the end, and what a pleasure to see his return to the screen.",
 # ]
 
+prompt="react에서 넘어온 변수 ex)prompt"
+
+translator = pipeline("translation", 
+                      model="Helsinki-NLP/opus-mt-tc-bible-big-mul-mul")
+
+translated = translator(">>kr<< You'd better not speak to Tom about that.")
+#text
+print(translated, translated[0]['translation_text'])
+
+#변수가 많아지면 for문 사용여부
+src=""
 
 sentimental = pipeline('sentiment-analysis',
                        model= "nlptown/bert-base-multilingual-uncased-sentiment")
 # 0번째 배열의 translation_text
 # [{'translation_text': "Pedro Pascalqa qatiqnintam reto-fuerzaman pusan, huk rikchaq rikch'ayniyoq rikch'ayniyoq rikch'ayniyoqman."}] 
-
 # [{'label': '1 star', 'score': 0.5432569980621338}]
+
+result = sentimental( translated[0]['translation_text'])
+print(translated, result)
 
