@@ -7,19 +7,19 @@ app = FastAPI()
 
 
 # #CORS
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=["*"],  # 배포할 땐 실제 프론트 도메인으로 제한
-#     allow_credentials=True,
-#     allow_methods=["*"],
-#     allow_headers=["*"],
-# )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 배포할 땐 실제 프론트 도메인으로 제한
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 #endpoint
-
 @app.post('/sentiment', response_model=ChatbotResponse)
-async def translate_sentiment(prompt:str):
+async def translate_sentiment(input:ChatbotInput):
+    prompt=input.prompt
     answer= trans_senti(prompt)
 
     return answer
