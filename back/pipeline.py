@@ -14,33 +14,44 @@ from transformers import pipeline
 #     "Francis Ford Coppola's Megalopolis is bloated and unforgivably dull.",
 #     "The absolute authority and force of Daniel Day-Lewis carries this movie in the end, and what a pleasure to see his return to the screen.",
 # ]
-# def trans_senti(prompt:str):
-prompt="react에서 넘어온 변수 ex)prompt"
 
-translator = pipeline("translation", 
-                    model="Helsinki-NLP/opus-mt-tc-bible-big-mul-mul")
+# translator + sentiment-analysis 모델 묶어서 endpoint 넘겨줌
+def trans_senti(prompt:str):         #prompt:str):
+    prompt=prompt
 
-translated = translator(">>kr<< You'd better not speak to Tom about that.")
-#text
-print(translated, translated[0]['translation_text'])
+    translator = pipeline("translation", 
+                        model="Helsinki-NLP/opus-mt-tc-bible-big-mul-mul")
 
-#변수가 많아지면 for문 사용여부
-src=""
+    translated = translator(">>kr<< "+ prompt)
+    #text
+    print(translated, translated[0]['translation_text'])
 
-sentimental = pipeline('sentiment-analysis',
-                    model= "nlptown/bert-base-multilingual-uncased-sentiment")
-# 0번째 배열의 translation_text
-# [{'translation_text': "Pedro Pascalqa qatiqnintam reto-fuerzaman pusan, huk rikchaq rikch'ayniyoq rikch'ayniyoq rikch'ayniyoqman."}] 
-# [{'label': '1 star', 'score': 0.5432569980621338}]
+    #변수가 많아지면 for문 사용여부
+    src=""
 
-result = sentimental( translated[0]['translation_text'])
-print(translated)
-print(result)
-print('trans_type(trans_text):',type(translated[0]['translation_text']))
-print('result_type(label):',type(result[0]['label']))
-print('result_type(score):', type(result[0]['score']))
+    sentimental = pipeline('sentiment-analysis',
+                        model= "nlptown/bert-base-multilingual-uncased-sentiment")
+    # 0번째 배열의 translation_text
+    # [{'translation_text': "Pedro Pascalqa qatiqnintam reto-fuerzaman pusan, huk rikchaq rikch'ayniyoq rikch'ayniyoq rikch'ayniyoqman."}] 
+    # [{'label': '1 star', 'score': 0.5432569980621338}]
 
-# # api넘길때 json형태로 속성필드 풀어서 넘김 -> 파싱 용이, pydantic valdiation용이, GPT>다중모델 파이프라인일때 중요
-# return {'translation_text':translated[0]['translation_text'],
-#         'label':result[0]['label'], 'score':result[0]['score']}
+    result = sentimental( translated[0]['translation_text'])
 
+    #test
+    print(translated)
+    print(result)
+    print('trans_type(trans_text):',type(translated[0]['translation_text']))
+    print('result_type(label):',type(result[0]['label']))
+    print('result_type(score):', type(result[0]['score']))
+
+    response={'translation_text':translated[0]['translation_text'],
+            'label':result[0]['label'], 'score':result[0]['score']}
+    
+    #test
+    print("response:",response)
+    print("type:", type(response))
+
+    # api넘길때 JSON?Dict? 파싱 용이, pydantic valdiation용이, GPT>다중모델 파이프라인일때 중요
+    return response
+
+#반환값 확인용 test - 추후 삭제

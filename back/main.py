@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from schemas import ChatbotResponse
+from schemas import ChatbotResponse, ChatbotInput
+from pipeline import trans_senti
 
 app = FastAPI()
 
@@ -19,5 +20,9 @@ app = FastAPI()
 
 @app.post('/sentiment', response_model=ChatbotResponse)
 async def translate_sentiment(prompt:str):
-    return {"prompt":prompt}
+    answer= trans_senti(prompt)
 
+    return answer
+
+# response: {'translation_text': '그런데네가그런일을 Tom에게말하지않도록좋아야합니다.',
+#             'label': '1 star', 'score': 0.3381156623363495}
