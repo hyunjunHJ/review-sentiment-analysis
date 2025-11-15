@@ -1,32 +1,38 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './App.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./App.css";
 
-const mockReview=[
+const mockReview = [
   // Very Good
   "Life-saving service! The team went above and beyond to help me meet my deadline at the last minute.",
   // Good
   "Reliable and easy to use interface, definitely makes my daily workflow much smoother.",
   // Neutral
   "Updates are frequent, but they seem to just move buttons around without adding any real value.",
-]
+];
 
 const App = () => {
-  const [inputText, setInputText] = useState('')
+  const [inputText, setInputText] = useState("");
   const [result, setResult] = useState(null);
 
-  const onhandleSubmit = async (e)=>{
+  const onhandleSubmit = async (e) => {
     e.preventDefault();
-    console.log(inputText);  
-   
+    console.log(inputText);
+
     try {
-      const res = await axios.post("http://localhost:8081/sentiment",  
+      const res = await axios.post(
+        "http://localhost:8081/sentiment",
         {
-        prompt:inputText},
-        {headers: {
-          "Content-Type": 'application/json'}});     
-          setResult(res.data) 
-      return res
+          prompt: inputText,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setResult(res.data);
+      return res;
     } catch (err) {
       console.error(err);
       alert("번역, 감정분석 실패");
