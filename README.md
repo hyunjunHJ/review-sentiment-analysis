@@ -20,12 +20,12 @@ conda activate fastapi
 ```uvicorn main:app --reload --port 8000```
 
 ## 프론트엔드 설정 react(vite)
-cd ../front
+```cd ../front```
 
-# 패키지 설치
-npm install
+### 패키지 설치
+```npm install```
 
-# 개발 서버 실행
-npm run dev
+### 개발 서버 실행
+```npm run dev```
 
 
