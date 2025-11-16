@@ -2,23 +2,24 @@
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;        /* 화면 전체 높이 채움 */
-  background: #f0f2f5;       /* 연한 회색 배경 */
+  align-items: flex-start; 
+  min-height: 100vh;
   margin: 0;
-  padding: 0;
-}
-
-.container {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px 0;
   font-family: "Arial", sans-serif;
 }
 
+/* 메인 카드 */
+.container {
+  max-width: 650px;
+  width: 100%;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+}
+
+/* 메인 타이틀 */
 .main-title {
   text-align: center;
   font-size: 26px;
@@ -29,67 +30,81 @@ body {
 
 /* 섹션 제목 */
 .title {
-  margin-bottom: 10px;
-  font-size: 20px;
+  margin-bottom: 12px;
+  font-size: 19px;
   font-weight: bold;
+  color: #555;
 }
 
-/* 샘플 데이터 리스트 박스 */
+/* 샘플 데이터 박스 */
 .sample-box {
-  background: #f7f7f7;
-  border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 20px;
+  background: #f5f7fa;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 22px;
 }
 
 .sample-list li {
-  margin-bottom: 6px;
-  line-height: 1.4;
+  margin-bottom: 8px;
+  line-height: 1.5;
+  color: #444;
 }
 
-/* 입력창 + 버튼 */
+/* 입력 영역 */
+.input-area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0px;
+}
+
 .input-area input {
-  flex: 1;
-  padding: 12px 16px;      
-  border: 1px solid #ccc;
-  border-radius: 8px;      
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px;
   font-size: 15px;
-  width: 100%;             
-  min-height: 45px;        
+  background: #fafafa;
+
+  min-height: 80px;
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: break-word;
   box-sizing: border-box;
 }
 
-.input-area input {
-  flex: 1;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
+/* 버튼 */
+.button-row {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;  /* 오른쪽 정렬 */
+  margin-top: 10px;
 }
 
 .button-primary {
-  padding: 8px 14px;
-  background: #4a6cf7;
-  color: white;
+  padding: 10px 18px;
+  background: #e1e4eb;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 15px;
+  white-space: nowrap;
 }
 
 .button-primary:hover {
-  background: #3d5fe0;
+  background: #a8a9b3;
 }
 
-/* 분석 결과 박스 */
+/* 결과 박스 */
 .result-box {
-  margin-top: 20px;
-  background: #eef3ff;
-  padding: 16px;
-  border-radius: 8px;
+  margin-top: 25px;
+  background: #f3f5fa;
+  padding: 18px;
+  border-radius: 10px;
 }
 
 .result-line {
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   font-size: 15px;
+  color: #333;
 }
